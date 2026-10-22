@@ -1,0 +1,5 @@
+Usage_Quartile,Test_Rows,Minimum_Actual_kWh,Maximum_Actual_kWh,Mean_Actual_kWh,Mean_Predicted_kWh,MAE_kWh,Mean_Signed_Error_kWh
+1,50,153.0,280.7,245.416,245.3255,12.4013,0.0905
+2,50,281.6,344.1,309.718,309.2562,11.881,0.4618
+3,50,344.6,454.0,402.704,403.0691,18.8946,-0.3651
+4,50,454.1,718.0,529.146,523.2022,20.4968,5.9438

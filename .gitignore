@@ -12,4 +12,6 @@ instance/
 Thumbs.db
 node_modules/
 dist/
+/reports/render_*/
+/reports/.build_report.py
 npm-debug.log*

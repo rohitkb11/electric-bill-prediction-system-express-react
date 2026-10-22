@@ -10,9 +10,52 @@
   "selected_model": "Ridge Regression",
   "ridge_alpha": 1.0,
   "training_cross_validation_mae_kwh": 16.729,
+  "linear_regression_cross_validation_mae_kwh": 16.7305,
+  "linear_regression_cross_validation_mae_std_kwh": 0.2252,
+  "ridge_alpha_cross_validation_results": [
+    {
+      "alpha": 0.1,
+      "mean_cv_mae_kwh": 16.7303,
+      "std_cv_mae_kwh": 0.2017,
+      "rank": 2
+    },
+    {
+      "alpha": 1.0,
+      "mean_cv_mae_kwh": 16.7287,
+      "std_cv_mae_kwh": 0.2041,
+      "rank": 1
+    },
+    {
+      "alpha": 10.0,
+      "mean_cv_mae_kwh": 16.7466,
+      "std_cv_mae_kwh": 0.2311,
+      "rank": 3
+    },
+    {
+      "alpha": 100.0,
+      "mean_cv_mae_kwh": 17.8314,
+      "std_cv_mae_kwh": 0.4139,
+      "rank": 4
+    }
+  ],
   "test_mae_kwh": 15.918,
   "test_rmse_kwh": 20.946,
   "test_r2": 0.9656,
+  "test_mean_actual_usage_kwh": 371.746,
+  "test_mean_signed_error_kwh": 1.533,
+  "test_median_signed_error_kwh": 0.762,
+  "test_p90_absolute_error_kwh": 33.992,
+  "test_max_absolute_error_kwh": 76.133,
+  "test_within_10_kwh_pct": 42.0,
+  "test_within_20_kwh_pct": 70.0,
+  "test_within_30_kwh_pct": 85.5,
+  "cold_start_evaluation": {
+    "scenario": "Previous month usage withheld for every held-out household",
+    "imputation": "Training-set median from the fitted preprocessing pipeline",
+    "test_mae_kwh": 36.039,
+    "test_rmse_kwh": 45.613,
+    "test_r2": 0.8367
+  },
   "model_comparison": [
     {
       "Model": "Linear Regression",

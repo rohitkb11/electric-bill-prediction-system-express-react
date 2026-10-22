@@ -8,9 +8,9 @@ A small AI/ML web application for estimating monthly household electricity use f
 - **Dataset collection:** Kaggle's [Electricity Bill Prediction dataset](https://www.kaggle.com/datasets/armanahmedtaief/electricity-bill-prediction), included in `data/electricity_bill_prediction.csv`.
 - **Data preprocessing:** duplicate removal, numeric conversion, target cleanup, median/mode imputation, scaling, and one-hot encoding inside a scikit-learn pipeline.
 - **Model development:** Linear Regression baseline compared with optimized Ridge Regression.
-- **Performance evaluation:** 80:20 train/test split, five-fold cross-validation on the training portion, MAE, RMSE, and R².
+- **Performance evaluation:** 80:20 train/test split, five-fold cross-validation on the training portion, MAE, RMSE, and R², plus a held-out cold-start scenario with previous-month usage removed.
 - **Model optimization:** Ridge alpha selection using training-only cross-validation.
-- **Result analysis:** saved metrics, test predictions, model coefficients, and an actual-versus-predicted chart.
+- **Result analysis:** saved cross-validation search results, test predictions, residual summaries, errors by test-usage quartile, model coefficients, and diagnostic charts.
 - **Frontend and backend:** React household form, Express API, password-hash authentication, private per-user prediction history, and a responsive dashboard.
 
 ## Dataset limitation
@@ -65,7 +65,13 @@ This creates or updates:
 - `models/electricity_usage_model.joblib` — preprocessing plus the selected fitted regression model.
 - `results/metrics.json` — row counts, selected model, and held-out metrics.
 - `results/test_predictions.csv` — actual and predicted test usage.
+- `results/cold_start_test_predictions.csv` — held-out predictions when previous-month usage is unavailable, matching a first-visit estimate.
+- `results/error_by_usage_band.csv` — held-out MAE and signed error across four actual-usage quartiles.
 - `results/model_coefficients.csv` — fitted model coefficients.
 - `results/actual_vs_predicted.png` — evaluation plot.
+- `results/residual_diagnostics.png` — residual-versus-prediction plot and residual histogram.
+
+`metrics.json` also records the five-fold alpha search scores, residual bias, the 90th-percentile absolute error, and the share of test estimates within 10, 20, and 30 kWh of the observed value. These are descriptive diagnostics for the fixed test split, not guarantees for future households.
+The cold-start evaluation is reported separately because previous-month usage is strongly predictive and may be absent for new users. The headline metrics use the full feature set; do not present them as new-user accuracy.
 
 The Express server calls `predict_usage.py` for each estimate. That script loads the saved model and returns the predicted kWh as JSON; Express calculates the bill and saves both the estimate and household inputs to the user's history.
