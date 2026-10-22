@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+instance/
+*.sqlite3
+*.db
+.pytest_cache/
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+npm-debug.log*

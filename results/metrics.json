@@ -1,0 +1,30 @@
+{
+  "problem": "Predict monthly household electricity usage in kWh",
+  "target": "Monthly_Usage_kWh",
+  "dataset_rows_loaded": 1000,
+  "dataset_rows_used": 1000,
+  "duplicate_rows_removed": 0,
+  "missing_values_before_imputation": 0,
+  "train_rows": 800,
+  "test_rows": 200,
+  "selected_model": "Ridge Regression",
+  "ridge_alpha": 1.0,
+  "training_cross_validation_mae_kwh": 16.729,
+  "test_mae_kwh": 15.918,
+  "test_rmse_kwh": 20.946,
+  "test_r2": 0.9656,
+  "model_comparison": [
+    {
+      "Model": "Linear Regression",
+      "MAE_kWh": 15.9257,
+      "RMSE_kWh": 20.9559,
+      "R2": 0.9655
+    },
+    {
+      "Model": "Optimized Ridge",
+      "MAE_kWh": 15.9184,
+      "RMSE_kWh": 20.9456,
+      "R2": 0.9656
+    }
+  ]
+}
