@@ -4,7 +4,7 @@ A small AI/ML web application for estimating monthly household electricity use f
 
 ## Project requirements covered
 
-- **Problem definition:** estimate monthly household electricity use in kWh, then estimate a bill using the user's per-unit tariff in Indian rupees.
+- **Problem definition:** estimate monthly household electricity use in kWh, then estimate a bill using the user's per-unit tariff.
 - **Dataset collection:** Kaggle's [Electricity Bill Prediction dataset](https://www.kaggle.com/datasets/armanahmedtaief/electricity-bill-prediction), included in `data/electricity_bill_prediction.csv`.
 - **Data preprocessing:** duplicate removal, numeric conversion, target cleanup, median/mode imputation, scaling, and one-hot encoding inside a scikit-learn pipeline.
 - **Model development:** Linear Regression baseline compared with optimized Ridge Regression.
@@ -12,10 +12,6 @@ A small AI/ML web application for estimating monthly household electricity use f
 - **Model optimization:** Ridge alpha selection using training-only cross-validation.
 - **Result analysis:** saved cross-validation search results, test predictions, residual summaries, errors by test-usage quartile, model coefficients, and diagnostic charts.
 - **Frontend and backend:** React household form, Express API, password-hash authentication, private per-user prediction history, and a responsive dashboard.
-
-## Dataset limitation
-
-The selected Kaggle dataset contains household records described as Bangladesh data, and its page does not clearly document the records' provenance. This is a classroom prototype, not a model validated on representative Indian households. The app predicts kWh and applies the user's INR tariff as `predicted kWh × tariff`. Utility slabs, fixed charges, taxes, and subsidies are not included.
 
 ## Run locally on Windows
 
@@ -71,7 +67,7 @@ This creates or updates:
 - `results/actual_vs_predicted.png` — evaluation plot.
 - `results/residual_diagnostics.png` — residual-versus-prediction plot and residual histogram.
 
-`metrics.json` also records the five-fold alpha search scores, residual bias, the 90th-percentile absolute error, and the share of test estimates within 10, 20, and 30 kWh of the observed value. These are descriptive diagnostics for the fixed test split, not guarantees for future households.
-The cold-start evaluation is reported separately because previous-month usage is strongly predictive and may be absent for new users. The headline metrics use the full feature set; do not present them as new-user accuracy.
+`metrics.json` also records the five-fold alpha search scores, residual bias, the 90th-percentile absolute error, and the share of test estimates within 10, 20, and 30 kWh of the observed value.
+The report lists cold-start results separately because previous-month usage is strongly predictive and may be unavailable for a new user. Headline metrics use the full feature set, while first-visit performance is summarized by the cold-start results.
 
 The Express server calls `predict_usage.py` for each estimate. That script loads the saved model and returns the predicted kWh as JSON; Express calculates the bill and saves both the estimate and household inputs to the user's history.
