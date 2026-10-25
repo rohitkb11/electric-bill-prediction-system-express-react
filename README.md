@@ -29,7 +29,7 @@ npm run dev
 
 Open the Vite address printed in the terminal (normally <http://127.0.0.1:5173>). The Express API runs on port 3000 and the Vite development server proxies `/api` calls to it. Create an account; a new account's history starts empty.
 
-The backend creates `instance/electricity_app.sqlite3` on first run. It stores accounts, sessions, and prediction history there. Each account's history is filtered by that account's user ID. Returning users see their latest predicted usage prefilled as an editable starting value for previous-month usage.
+The backend creates `instance/electricity_app.sqlite3` on first run. It stores accounts and prediction history there. Each account sees only its own history. Sessions are kept in memory for this simple local demo, so signing in again may be needed after restarting the server. Returning users see their latest predicted usage prefilled as an editable starting value for previous-month usage.
 
 If the Python command on your system is named differently, set `PYTHON_EXECUTABLE` to the interpreter that has the requirements installed. For example:
 
@@ -37,18 +37,16 @@ If the Python command on your system is named differently, set `PYTHON_EXECUTABL
 $env:PYTHON_EXECUTABLE = "C:\Path\To\Python\python.exe"
 ```
 
-## Production build
+## Build and start locally
 
-Build the React frontend and start Express to serve both the built frontend and API:
+To build React and have Express serve the frontend locally:
 
 ```powershell
 npm run build
-$env:NODE_ENV = "production"
-$env:SESSION_SECRET = "use-a-unique-long-random-secret"
 npm start
 ```
 
-Production needs HTTPS so session cookies are marked secure. The server listens on all interfaces in production by default; set `HOST` if your hosting platform requires a different binding. The local SQLite database is ignored by Git and remains on the computer running the app. This simple authentication setup is intended for a local coursework demonstration; use an appropriate hosted database and deployment security configuration for a public service.
+The SQLite database keeps accounts and prediction history between runs. For simplicity, sign-in sessions are held in memory and end when the server restarts.
 
 ## Train or inspect the model
 
